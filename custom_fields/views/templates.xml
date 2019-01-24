@@ -1,0 +1,100 @@
+<odoo>
+    <data>
+        <template id="cutom_report_saleorder_document" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//div[@id='informations']/div[3]" position="after">
+                <div t-if="doc.event_date" class="col-xs-3">
+                    <strong>Event Date:</strong>
+                    <p t-field="doc.event_date" t-options="{'widget': 'date'}"/>
+                </div>
+            </xpath>
+        </template>
+        <template id="cutom_report_invoice_document" inherit_id="account.report_invoice_document">
+            <xpath expr="//div[@name='reference']" position="before">
+                <div class="col-xs-2" t-if="o.event_date">
+                    <strong>Event Date:</strong>
+                    <p t-field="o.event_date" t-options="{'widget': 'date'}"/>
+                </div>
+            </xpath>
+        </template>
+        <template id="cutom_report_purchaseorder_document" inherit_id="purchase.report_purchaseorder_document">
+            <xpath expr="//div[@class='row mt32 mb32']/div[3]" position="after">
+                <div t-if="o.event_date" class="col-xs-3">
+                    <strong>Event Date:</strong>
+                    <p t-field="o.event_date" t-options="{'widget': 'date'}"/>
+                </div>
+            </xpath>
+        </template>
+        <!-- <template id="cutom_report_purchasequotation_document" inherit_id="purchase.report_purchasequotation_document">
+            <xpath expr="//h2" position="after">
+                <div t-if="o.event_date" class="col-xs-3">
+                    <strong>Event Date:</strong>
+                    <p t-field="o.event_date"/>
+                </div>
+            </xpath>
+        </template> -->
+        <template id="cutom_external_layout_boxed" inherit_id="web.external_layout_boxed">
+            <xpath expr="//div[@class='footer o_boxed_footer']" position="replace">
+                <div class="footer o_boxed_footer">
+                    <div class="text-center">
+                        <ul class="list-inline">
+                            <li t-if="company.phone">Tel: <span t-field="company.phone"/></li>
+                            <li t-if="company.email">Mail: <span t-field="company.email"/></li>
+                            <li t-if="company.website">Web: <span t-field="company.website"/></li>
+                            <li t-if="company.vat"><t t-esc="company.country_id.vat_label or 'TIN'"/>: <span t-field="company.vat"/></li>
+                            <li t-if="company.report_footer"><span t-esc="company.report_footer"/></li>
+                        </ul>
+                        <div class="hidden" t-field="company.report_footer"/>
+                        <div>
+                            Page: <span class="page"/> / <span class="topage"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+        <template id="cutom_external_layout_standard" inherit_id="web.external_layout_standard">
+            <xpath expr="//div[@class='footer']" position="replace">
+                <div class="footer">
+                    <div class="text-center" style="border-top: 1px solid black;">
+                        <ul class="list-inline mb4">
+                            <li t-if="company.phone">Phone: <span t-field="company.phone"/></li>
+                            <li t-if="company.email">Email: <span t-field="company.email"/></li>
+                            <li t-if="company.website">Web: <span t-field="company.website"/></li>
+                            <li t-if="company.vat"><t t-esc="company.country_id.vat_label or 'TIN'"/>: <span t-field="company.vat"/></li>
+                            <li t-if="company.report_footer"><span t-esc="company.report_footer"/></li>
+                        </ul>
+
+                        <div class="hidden" name="financial_infos">
+                            <span t-field="company.report_footer"/>
+                        </div>
+
+                        <div class="text-muted">
+                            Page: <span class="page"/> / <span class="topage"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+        <template id="cutom_external_layout_background" inherit_id="web.external_layout_background">
+            <xpath expr="//div[@class='footer o_background_footer']" position="replace">
+                <div class="footer o_background_footer" style="margin:0px !important; padding:0px !important;">
+                    <div class="text-center" style="margin:0px !important; padding:0px !important;">
+                        <ul class="list-inline" style="margin:0px !important; padding:0px !important;">
+                            <li t-if="company.phone"><i class="fa fa-phone"/> <span t-field="company.phone"/></li>
+                            <li t-if="company.email"><i class="fa fa-at"/> <span t-field="company.email"/></li>
+                            <li t-if="company.website"><i class="fa fa-globe"/> <span t-field="company.website"/></li>
+                            <li t-if="company.vat"><i class="fa fa-building-o"/><t t-esc="company.country_id.vat_label or 'TIN'"/>: <span t-field="company.vat"/></li>
+                            <li t-if="company.report_footer"><span t-esc="company.report_footer"/></li>
+                        </ul>
+                        <div class="hidden" t-field="company.report_footer"/>
+                        <div class="text-muted">
+                            Page:
+                            <span class="page"/>
+                            of
+                            <span class="topage"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>
