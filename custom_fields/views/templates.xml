@@ -24,14 +24,16 @@
                 </div>
             </xpath>
         </template>
-        <!-- <template id="cutom_report_purchasequotation_document" inherit_id="purchase.report_purchasequotation_document">
+        <template id="cutom_report_purchasequotation_document" inherit_id="purchase.report_purchasequotation_document">
             <xpath expr="//h2" position="after">
-                <div t-if="o.event_date" class="col-xs-3">
-                    <strong>Event Date:</strong>
-                    <p t-field="o.event_date"/>
+                <div class="row mt32 mb32">
+                    <div t-if="o.event_date" class="col-xs-3">
+                        <strong>Event Date:</strong>
+                        <p t-field="o.event_date" t-options="{'widget': 'date'}"/>
+                    </div>
                 </div>
             </xpath>
-        </template> -->
+        </template>
         <template id="cutom_external_layout_boxed" inherit_id="web.external_layout_boxed">
             <xpath expr="//div[@class='footer o_boxed_footer']" position="replace">
                 <div class="footer o_boxed_footer">

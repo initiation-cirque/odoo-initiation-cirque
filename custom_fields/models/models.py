@@ -5,7 +5,7 @@ from odoo import models, fields, api
 class CustomSaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    event_date = fields.Datetime(string="Event Date")
+    event_date = fields.Datetime(string="Event Date", default=fields.Datetime.now())
 
     @api.multi
     def _prepare_invoice(self):
@@ -14,7 +14,7 @@ class CustomSaleOrder(models.Model):
         """
         res = super(CustomSaleOrder, self)._prepare_invoice()
         res.update({
-            'event_date': self.event_date,
+            'event_date': self.event_date or fields.Datetime.now(),
             })
         return res
 
@@ -29,7 +29,7 @@ class CustomSaleAdvancePaymentInv(models.TransientModel):
         """
         invoice = super(CustomSaleAdvancePaymentInv, self)._create_invoice(order, so_line, amount)
         invoice.update({
-            'event_date': order.event_date,
+            'event_date': order.event_date or fields.Datetime.now(),
             })
         return invoice
 
@@ -37,7 +37,7 @@ class CustomSaleAdvancePaymentInv(models.TransientModel):
 class CustomPurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
-    event_date = fields.Datetime(string="Event Date")
+    event_date = fields.Datetime(string="Event Date", default=fields.Datetime.now())
 
     @api.multi
     def action_view_invoice(self):
@@ -45,17 +45,17 @@ class CustomPurchaseOrder(models.Model):
         override this private method to pass the event date to invoice.
         """
         result = super(CustomPurchaseOrder, self).action_view_invoice()
-        result['context']['default_event_date'] = self.event_date
+        result['context']['default_event_date'] = self.event_date or fields.Datetime.now()
         return result
 
 
 class CustomAccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
-    event_date = fields.Datetime(string="Event Date")
+    event_date = fields.Datetime(string="Event Date", default=fields.Datetime.now())
 
 
 class CustomCRMLead(models.Model):
     _inherit = 'crm.lead'
 
-    event_date = fields.Datetime(string="Event Date")
+    event_date = fields.Datetime(string="Event Date", default=fields.Datetime.now())
