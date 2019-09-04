@@ -11,6 +11,21 @@
           <field name="event_date" widget="date" 
                   attrs="{'readonly': [('state','not in',['draft','sent','cancel'])]}"/>
         </field>
+        <xpath expr="//notebook/page[2]" position="after">
+          <page name="ip_information" string="Lead source">
+            <group>
+                <field name="ipcountryname"/>
+                <field name="ipcountryiso"/>
+                <field name="ipcity"/>
+                <field name="source1"/>
+                <field name="medium1"/>
+                <field name="campaign1"/>
+                <field name="url1"/>
+                <field name="source1_date" widget="date"/>
+                <field name="gclid"/>
+            </group>
+          </page>
+        </xpath>
       </field>
     </record>
 
@@ -79,6 +94,21 @@
         <field name="date_due" position="after">
           <field name="event_date" widget="date" attrs="{'readonly': [('state','not in', ['draft'])]}"/>
         </field>
+        <xpath expr="//page[@name='other_info']" position="after">
+          <page name="ip_information" string="Lead source">
+            <group>
+                <field name="ipcountryname"/>
+                <field name="ipcountryiso"/>
+                <field name="ipcity"/>
+                <field name="source1"/>
+                <field name="medium1"/>
+                <field name="campaign1"/>
+                <field name="url1"/>
+                <field name="source1_date" widget="date"/>
+                <field name="gclid"/>
+            </group>
+          </page>
+        </xpath>
       </field>
     </record>
 
@@ -91,6 +121,22 @@
         <field name="date_due" position="after">
           <field name="event_date" widget="date" attrs="{'readonly': [('state','not in', ['draft'])]}"/>
         </field>
+        <!-- <xpath expr="//page[@name='other_info']" position="after">
+          <page name="ip_information" string="Ip Information">
+            <group>
+                <field name="ipcountryname"/>
+                <field name="ipcountryiso" invisible="1"/>
+                <field name="ipcity" invisible="1"/>
+                <field name="source1"/>
+                <field name="medium1"/>
+                <field name="campaign1"/>
+                <field name="url1"/>
+                <field name="source1_date" invisible="1"/>
+                <field name="source1_date" />
+                <field name="gclid"/>
+            </group>
+          </page>
+        </xpath> -->
       </field>
     </record>
 
@@ -113,6 +159,21 @@
         <field name="date_deadline" position="after">
           <field name="event_date" widget="date"/>
         </field>
+        <xpath expr="//page[@name='lead']" position="after">
+          <page name="ip_information" string="Lead source">
+            <group>
+                <field name="ipcountryname"/>
+                <field name="ipcountryiso"/>
+                <field name="ipcity"/>
+                <field name="source1"/>
+                <field name="medium1"/>
+                <field name="campaign1"/>
+                <field name="url1"/>
+                <field name="source1_date" widget="date"/>
+                <field name="gclid"/>
+            </group>
+          </page>
+        </xpath>
       </field>
     </record>
 
@@ -140,13 +201,34 @@
                                   'default_campaign_id': campaign_id,
                                   'default_medium_id': medium_id,
                                   'default_source_id': source_id,
-                                  'default_event_date': event_date}"/>
+                                  'default_event_date': event_date,
+
+                                  'default_ipcountryname': ipcountryname,
+                                  'default_ipcountryiso': ipcountryiso,
+                                  'default_ipcity': ipcity,
+                                  'default_source1': source1,
+                                  'default_source1_date': source1_date,
+                                  'default_medium1': medium1,
+                                  'default_campaign1': campaign1,
+                                  'default_url1': url1,
+                                  'default_gclid': gclid
+                                  }"/>
         </xpath>
         <xpath expr="//button[@name='%(sale_crm.sale_action_quotations)d']" position="replace">
             <button class="oe_stat_button" type="action" name="%(sale_crm.sale_action_quotations)d" 
               icon="fa-pencil-square-o"
               context="{'default_partner_id': partner_id, 'search_default_draft': 1, 
-                        'default_event_date': event_date}">
+                        'default_event_date': event_date,
+
+                        'default_ipcountryname': ipcountryname,
+                        'default_ipcountryiso': ipcountryiso,
+                        'default_ipcity': ipcity,
+                        'default_source1': source1,
+                        'default_source1_date': source1_date,
+                        'default_medium1': medium1,
+                        'default_campaign1': campaign1,
+                        'default_url1': url1,
+                        'default_gclid': gclid}">
                 <div class="o_stat_info">
                     <field name="sale_number" class="o_stat_value"/>
                     <span class="o_stat_text"> Quotation(s) </span>

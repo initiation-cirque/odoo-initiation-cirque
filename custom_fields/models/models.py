@@ -7,6 +7,16 @@ class CustomSaleOrder(models.Model):
 
     event_date = fields.Datetime(string="Event Date", default=fields.Datetime.now())
 
+    ipcountryname = fields.Text(string="Geoip Country")
+    ipcountryiso = fields.Text(string="Geoip Country ISO")
+    ipcity = fields.Text(string="Geoip City")
+    source1 = fields.Text(string="Source 1")
+    medium1 = fields.Text(string="Medium 1")
+    campaign1 = fields.Text(string="Campaign 1")
+    url1 = fields.Text(string="Url 1")
+    source1_date = fields.Datetime(string="Source Date 1")
+    gclid = fields.Text(string="Google Click ID")
+
     @api.multi
     def _prepare_invoice(self):
         """
@@ -15,6 +25,16 @@ class CustomSaleOrder(models.Model):
         res = super(CustomSaleOrder, self)._prepare_invoice()
         res.update({
             'event_date': self.event_date or fields.Datetime.now(),
+            
+            'ipcountryname': self.ipcountryname,
+            'ipcountryiso': self.ipcountryiso,
+            'ipcity': self.ipcity,
+            'source1': self.source1,
+            'source1_date': self.source1_date,
+            'medium1': self.medium1,
+            'campaign1':self.campaign1,
+            'url1':self.url1,
+            'gclid':self.gclid
             })
         return res
 
@@ -30,6 +50,16 @@ class CustomSaleAdvancePaymentInv(models.TransientModel):
         invoice = super(CustomSaleAdvancePaymentInv, self)._create_invoice(order, so_line, amount)
         invoice.update({
             'event_date': order.event_date or fields.Datetime.now(),
+
+            'ipcountryname': order.ipcountryname,
+            'ipcountryiso': order.ipcountryiso,
+            'ipcity': order.ipcity,
+            'source1': order.source1,
+            'source1_date': order.source1_date,
+            'medium1': order.medium1,
+            'campaign1':order.campaign1,
+            'url1':order.url1,
+            'gclid':order.gclid
             })
         return invoice
 
@@ -54,11 +84,55 @@ class CustomAccountInvoice(models.Model):
 
     event_date = fields.Datetime(string="Event Date", default=fields.Datetime.now())
 
+    ipcountryname = fields.Text(string="Geoip Country")
+    ipcountryiso = fields.Text(string="Geoip Country ISO")
+    ipcity = fields.Text(string="Geoip City")
+    source1 = fields.Text(string="Source 1")
+    medium1 = fields.Text(string="Medium 1")
+    campaign1 = fields.Text(string="Campaign 1")
+    url1 = fields.Text(string="Url 1")
+    source1_date = fields.Datetime(string="Source Date 1")
+    gclid = fields.Text(string="Google Click ID")
+
+    @api.model
+    def create(self,vals):
+        """
+        override this private method to update the custom fields in sale order to invoice.
+        """
+        res = super(CustomAccountInvoice,self).create(vals)
+        if res.origin:
+            sale_order = self.env['sale.order'].search([('name',"ilike",res.origin)])
+            if sale_order:
+                vals={
+                'ipcountryname': sale_order.ipcountryname,
+                'ipcountryiso': sale_order.ipcountryiso,
+                'ipcity': sale_order.ipcity,
+                'source1': sale_order.source1,
+                'source1_date': sale_order.source1_date,
+                'medium1': sale_order.medium1,
+                'campaign1':sale_order.campaign1,
+                'url1':sale_order.url1,
+                'gclid':sale_order.gclid
+                }
+                res.update(vals)
+
+        return res
+
 
 class CustomCRMLead(models.Model):
     _inherit = 'crm.lead'
 
     event_date = fields.Datetime(string="Event Date", default=fields.Datetime.now())
+
+    ipcountryname = fields.Text(string="Geoip Country")
+    ipcountryiso = fields.Text(string="Geoip Country ISO")
+    ipcity = fields.Text(string="Geoip City")
+    source1 = fields.Text(string="Source 1")
+    medium1 = fields.Text(string="Medium 1")
+    campaign1 = fields.Text(string="Campaign 1")
+    url1 = fields.Text(string="Url 1")
+    source1_date = fields.Datetime(string="Source Date 1")
+    gclid = fields.Text(string="Google Click ID")
 
 
 class CustomProcurementRule(models.Model):
