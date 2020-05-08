@@ -2,6 +2,10 @@
     <data>
         <template id="cutom_report_saleorder_document" inherit_id="sale.report_saleorder_document">
             <xpath expr="//div[@id='informations']/div[3]" position="after">
+                <div t-if="doc.bookingnumber" class="col-xs-3">
+                    <strong>Booking Number:</strong>
+                    <p t-field="doc.bookingnumber"/>
+                </div>
                 <div t-if="doc.event_date" class="col-xs-3">
                     <strong>Event Date:</strong>
                     <p t-field="doc.event_date" t-options="{'widget': 'date'}"/>
@@ -10,6 +14,10 @@
         </template>
         <template id="cutom_report_invoice_document" inherit_id="account.report_invoice_document">
             <xpath expr="//div[@name='reference']" position="before">
+                <div class="col-xs-2" t-if="o.bookingnumber">
+                    <strong>Booking Number:</strong>
+                    <p t-field="o.bookingnumber"/>
+                </div>
                 <div class="col-xs-2" t-if="o.event_date">
                     <strong>Event Date:</strong>
                     <p t-field="o.event_date" t-options="{'widget': 'date'}"/>
@@ -18,6 +26,10 @@
         </template>
         <template id="cutom_report_purchaseorder_document" inherit_id="purchase.report_purchaseorder_document">
             <xpath expr="//div[@class='row mt32 mb32']/div[3]" position="after">
+                <div t-if="o.bookingnumber" class="col-xs-3">
+                    <strong>Booking Number:</strong>
+                    <p t-field="o.bookingnumber"/>
+                </div>
                 <div t-if="o.event_date" class="col-xs-3">
                     <strong>Event Date:</strong>
                     <p t-field="o.event_date" t-options="{'widget': 'date'}"/>
@@ -27,6 +39,10 @@
         <template id="cutom_report_purchasequotation_document" inherit_id="purchase.report_purchasequotation_document">
             <xpath expr="//h2" position="after">
                 <div class="row mt32 mb32">
+                    <div t-if="o.bookingnumber" class="col-xs-3">
+                        <strong>Booking Number:</strong>
+                        <p t-field="o.bookingnumber"/>
+                    </div>
                     <div t-if="o.event_date" class="col-xs-3">
                         <strong>Event Date:</strong>
                         <p t-field="o.event_date" t-options="{'widget': 'date'}"/>

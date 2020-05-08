@@ -8,17 +8,53 @@
       <field name="inherit_id" ref="sale.view_order_form"/>
       <field name="arch" type="xml">
         <field name="pricelist_id" position="before">
-          <field name="event_date" widget="date" 
-                  attrs="{'readonly': [('state','not in',['draft','sent','cancel'])]}"/>
+          <!-- <field name="event_date" widget="date" 
+                  attrs="{'readonly': [('state','not in',['draft','sent','cancel'])]}"/> -->
+          <field name="bookingnumber" readonly="1"/>
+          <field name="event_date" widget="date"/>
         </field>
-        <xpath expr="//notebook/page[2]" position="after">
+        <xpath expr="//notebook/page[1]" position="before">
+          <page name="booking" string="Booking">
+            <group>
+              <group string="Booking">
+                  <field name="web_formid" readonly="1"/>
+                  <field name="web_product" readonly="1"/>
+                  <field name="web_subproduct" readonly="1"/>
+                  <field name="web_price" readonly="1"/>
+                  <field name="web_eventaddress_street"/>
+                  <field name="web_eventaddress_street2"/>
+                  <field name="web_eventaddress_city"/>
+                  <field name="web_eventaddress_zip"/>
+                  <field name="web_eventaddress_country"/>
+              </group>
+              <group string="Message">
+                <field name="web_message" readonly="1"/>
+              </group>
+              <group string="Extra information">
+                  <field name="web_extra_phone"/>
+                  <field name="web_participant_firstname"/>
+                  <field name="web_participant_lastname"/>
+                  <field name="web_participants_firstnames"/>
+                  <field name="web_dateofbirth"/>
+                  <field name="web_age_year"/>
+                  <field name="web_age_month"/>
+                  <field name="web_age_days"/>
+                  <field name="web_age_year_next"/>
+                  <field name="web_health_issue" readonly="1"/>
+                  <field name="web_health_issue_details"/>
+                  <field name="web_language" readonly="1"/>
+              </group>
+            </group>
+          </page>
+        </xpath>
+        <xpath expr="//notebook/page[3]" position="after">
           <page name="ip_information" string="Lead source">
             <group>
                 <field name="ipcountryname"/>
                 <field name="ipcountryiso"/>
                 <field name="ipcity"/>
                 <field name="source1"/>
-                <field name="medium1"/>
+                <field name="medium1"/> 
                 <field name="campaign1"/>
                 <field name="url1"/>
                 <field name="source1_date" widget="date"/>
@@ -35,7 +71,9 @@
       <field name="inherit_id" ref="sale.view_quotation_tree"/>
       <field name="arch" type="xml">
         <field name="date_order" position="after">
-          <field name="event_date" widget="date" attrs="{'readonly': [('state','not in',['draft','sent','cancel'])]}"/>
+          <!-- <field name="event_date" widget="date" attrs="{'readonly': [('state','not in',['draft','sent','cancel'])]}"/> -->
+          <field name="bookingnumber"/>
+          <field name="event_date" widget="date"/>
         </field>
       </field>
     </record>
@@ -46,7 +84,9 @@
       <field name="inherit_id" ref="sale.view_order_tree"/>
       <field name="arch" type="xml">
         <field name="confirmation_date" position="after">
-          <field name="event_date" widget="date" attrs="{'readonly': [('state','not in',['draft','sent','cancel'])]}"/>
+          <!-- <field name="event_date" widget="date" attrs="{'readonly': [('state','not in',['draft','sent','cancel'])]}"/> -->
+          <field name="bookingnumber"/>
+          <field name="event_date" widget="date"/>
         </field>
       </field>
     </record>
@@ -57,8 +97,9 @@
       <field name="inherit_id" ref="purchase.purchase_order_form"/>
       <field name="arch" type="xml">
         <field name="date_order" position="after">
-          <field name="event_date" widget="date" 
-                attrs="{'readonly': [('state','in',['cancel','purchase','done'])]}"/>
+          <!-- <field name="event_date" widget="date" attrs="{'readonly': [('state','in',['cancel','purchase','done'])]}"/> -->
+          <field name="bookingnumber" readonly="1"/>
+          <field name="event_date" widget="date"/>
         </field>
       </field>
     </record>
@@ -69,7 +110,9 @@
       <field name="inherit_id" ref="purchase.purchase_order_tree"/>
       <field name="arch" type="xml">
         <field name="date_order" position="after">
-          <field name="event_date" widget="date" attrs="{'readonly': [('state','in',('cancel','purchase','done'))]}"/>
+          <!-- <field name="event_date" widget="date" attrs="{'readonly': [('state','in',('cancel','purchase','done'))]}"/> -->
+          <field name="bookingnumber"/>
+          <field name="event_date" widget="date"/>
         </field>
       </field>
     </record>
@@ -81,7 +124,9 @@
       <field name="inherit_id" ref="account.invoice_tree"/>
       <field name="arch" type="xml">
         <field name="date_invoice" position="after">
-          <field name="event_date" widget="date" attrs="{'readonly': [('state','not in', ['draft'])]}"/>
+          <!-- <field name="event_date" widget="date" attrs="{'readonly': [('state','not in', ['draft'])]}"/> -->
+          <field name="bookingnumber" readonly="1"/>
+          <field name="event_date" widget="date"/>
         </field>
       </field>
     </record>
@@ -92,8 +137,44 @@
       <field name="inherit_id" ref="account.invoice_form"/>
       <field name="arch" type="xml">
         <field name="date_due" position="after">
-          <field name="event_date" widget="date" attrs="{'readonly': [('state','not in', ['draft'])]}"/>
+          <!-- <field name="event_date" widget="date" attrs="{'readonly': [('state','not in', ['draft'])]}"/> -->
+          <field name="bookingnumber" readonly="1"/>
+          <field name="event_date" widget="date"/>
         </field>
+        <xpath expr="//notebook/page[1]" position="before">
+          <page name="booking" string="Booking">
+            <group>
+              <group string="Booking">
+                  <field name="web_formid" readonly="1"/>
+                  <field name="web_product" readonly="1"/>
+                  <field name="web_subproduct" readonly="1"/>
+                  <field name="web_price" readonly="1"/>
+                  <field name="web_eventaddress_street"/>
+                  <field name="web_eventaddress_street2"/>
+                  <field name="web_eventaddress_city"/>
+                  <field name="web_eventaddress_zip"/>
+                  <field name="web_eventaddress_country"/>
+              </group>
+              <group string="Message">
+                <field name="web_message" readonly="1"/>
+              </group>
+              <group string="Extra information">
+                  <field name="web_extra_phone"/>
+                  <field name="web_participant_firstname"/>
+                  <field name="web_participant_lastname"/>
+                  <field name="web_participants_firstnames"/>
+                  <field name="web_dateofbirth"/>
+                  <field name="web_age_year"/>
+                  <field name="web_age_month"/>
+                  <field name="web_age_days"/>
+                  <field name="web_age_year_next"/>
+                  <field name="web_health_issue" readonly="1"/>
+                  <field name="web_health_issue_details"/>
+                  <field name="web_language" readonly="1"/>
+              </group>
+            </group>
+          </page>
+        </xpath>
         <xpath expr="//page[@name='other_info']" position="after">
           <page name="ip_information" string="Lead source">
             <group>
@@ -119,7 +200,9 @@
       <field name="inherit_id" ref="account.invoice_supplier_form"/>
       <field name="arch" type="xml">
         <field name="date_due" position="after">
-          <field name="event_date" widget="date" attrs="{'readonly': [('state','not in', ['draft'])]}"/>
+          <!-- <field name="event_date" widget="date" attrs="{'readonly': [('state','not in', ['draft'])]}"/> -->
+          <field name="bookingnumber" readonly="1"/>
+          <field name="event_date" widget="date"/>
         </field>
         <!-- <xpath expr="//page[@name='other_info']" position="after">
           <page name="ip_information" string="Ip Information">
@@ -146,7 +229,9 @@
       <field name="inherit_id" ref="account.invoice_supplier_tree"/>
       <field name="arch" type="xml">
         <field name="date_invoice" position="after">
-          <field name="event_date" widget="date" attrs="{'readonly': [('state','not in', ['draft'])]}"/>
+          <!-- <field name="event_date" widget="date" attrs="{'readonly': [('state','not in', ['draft'])]}"/> -->
+          <field name="bookingnumber"/>
+          <field name="event_date" widget="date"/>
         </field>
       </field>
     </record>
@@ -157,8 +242,43 @@
       <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
       <field name="arch" type="xml">
         <field name="date_deadline" position="after">
+          <field name="bookingnumber"/>
           <field name="event_date" widget="date"/>
         </field>
+        <xpath expr="//notebook/page[1]" position="before">
+          <page name="booking" string="Booking">
+            <group>
+              <group string="Booking">
+                  <field name="web_formid"/>
+                  <field name="web_product"/>
+                  <field name="web_subproduct"/>
+                  <field name="web_price"/>
+                  <field name="web_eventaddress_street"/>
+                  <field name="web_eventaddress_street2"/>
+                  <field name="web_eventaddress_city"/>
+                  <field name="web_eventaddress_zip"/>
+                  <field name="web_eventaddress_country"/>
+              </group>
+              <group string="Message">
+                <field name="web_message"/>
+              </group>
+              <group string="Extra information">
+                  <field name="web_extra_phone"/>
+                  <field name="web_participant_firstname"/>
+                  <field name="web_participant_lastname"/>
+                  <field name="web_participants_firstnames"/>
+                  <field name="web_dateofbirth"/>
+                  <field name="web_age_year"/>
+                  <field name="web_age_month"/>
+                  <field name="web_age_days"/>
+                  <field name="web_age_year_next"/>
+                  <field name="web_health_issue"/>
+                  <field name="web_health_issue_details"/>
+                  <field name="web_language"/>
+              </group>
+            </group>
+          </page>
+        </xpath>
         <xpath expr="//page[@name='lead']" position="after">
           <page name="ip_information" string="Lead source">
             <group>
@@ -183,6 +303,7 @@
       <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
       <field name="arch" type="xml">
         <field name="name" position="after">
+          <field name="bookingnumber"/>
           <field name="event_date" widget="date"/>
         </field>
       </field>
@@ -211,8 +332,31 @@
                                   'default_medium1': medium1,
                                   'default_campaign1': campaign1,
                                   'default_url1': url1,
-                                  'default_gclid': gclid
-                                  }"/>
+                                  'default_gclid': gclid,
+                                  'default_bookingnumber' : bookingnumber, 
+                                  'default_web_formid' : web_formid, 
+                                  'default_web_product' : web_product, 
+                                  'default_web_subproduct' : web_subproduct, 
+                                  'default_web_price' : web_price, 
+                                  'default_web_eventaddress_street' : web_eventaddress_street, 
+                                  'default_web_eventaddress_street2' : web_eventaddress_street2, 
+                                  'default_web_eventaddress_city' : web_eventaddress_city, 
+                                  'default_web_eventaddress_zip' : web_eventaddress_zip, 
+                                  'default_web_eventaddress_country' : web_eventaddress_country, 
+                                  'default_web_extra_phone' : web_extra_phone, 
+                                  'default_web_participant_firstname' : web_participant_firstname, 
+                                  'default_web_participant_lastname' : web_participant_lastname, 
+                                  'default_web_participants_firstnames' : web_participants_firstnames, 
+                                  'default_web_dateofbirth' : web_dateofbirth, 
+                                  'default_web_age_year' : web_age_year, 
+                                  'default_web_age_month' : web_age_month, 
+                                  'default_web_age_days' : web_age_days, 
+                                  'default_web_age_year_next' : web_age_year_next, 
+                                  'default_web_health_issue' : web_health_issue, 
+                                  'default_web_health_issue_details' : web_health_issue_details, 
+                                  'default_web_language' : web_language, 
+                                  'default_web_message' : web_message
+                              }"/>
         </xpath>
         <xpath expr="//button[@name='%(sale_crm.sale_action_quotations)d']" position="replace">
             <button class="oe_stat_button" type="action" name="%(sale_crm.sale_action_quotations)d" 
@@ -228,7 +372,32 @@
                         'default_medium1': medium1,
                         'default_campaign1': campaign1,
                         'default_url1': url1,
-                        'default_gclid': gclid}">
+                        'default_gclid': gclid,
+
+                        'default_bookingnumber' : bookingnumber, 
+                        'default_web_formid' : web_formid, 
+                        'default_web_product' : web_product, 
+                        'default_web_subproduct' : web_subproduct, 
+                        'default_web_price' : web_price, 
+                        'default_web_eventaddress_street' : web_eventaddress_street, 
+                        'default_web_eventaddress_street2' : web_eventaddress_street2, 
+                        'default_web_eventaddress_city' : web_eventaddress_city, 
+                        'default_web_eventaddress_zip' : web_eventaddress_zip, 
+                        'default_web_eventaddress_country' : web_eventaddress_country, 
+                        'default_web_extra_phone' : web_extra_phone, 
+                        'default_web_participant_firstname' : web_participant_firstname, 
+                        'default_web_participant_lastname' : web_participant_lastname, 
+                        'default_web_participants_firstnames' : web_participants_firstnames, 
+                        'default_web_dateofbirth' : web_dateofbirth, 
+                        'default_web_age_year' : web_age_year, 
+                        'default_web_age_month' : web_age_month, 
+                        'default_web_age_days' : web_age_days, 
+                        'default_web_age_year_next' : web_age_year_next, 
+                        'default_web_health_issue' : web_health_issue, 
+                        'default_web_health_issue_details' : web_health_issue_details, 
+                        'default_web_language' : web_language, 
+                        'default_web_message' : web_message
+                        }">
                 <div class="o_stat_info">
                     <field name="sale_number" class="o_stat_value"/>
                     <span class="o_stat_text"> Quotation(s) </span>
